@@ -1,0 +1,168 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block contenido %}
+<div class="row">
+	<div class="col-lg-6">
+		<div class="box-element" id="form-wrapper">
+            <form id="form">
+                {% csrf_token %}
+                <div id="user-info" >
+                    <hr>
+                    <p>Informacion Personal</p>
+                    <div class="form-field">
+                        <input type="text" class="form-control" name="nombre" placeholder="Nombre..." required>
+                    </div>
+                    <div class="form-field">
+                        <input type="email" class="form-control" name="email" placeholder="Email..." required>
+                    </div>
+                </div>
+
+                <div id="shipping-info">
+                    <hr>
+                    <p>Shipping Information</p>
+                    <div class="form-field">
+                        <input type="text" class="form-control" name="direccion" placeholder="Dirección...">
+                    </div>
+                    
+                    <div class="form-field">
+                        <input type="text" class="form-control" name="ciudad" placeholder="Ciudad...">
+                    </div>
+
+                    <div class="form-field">
+                        <input type="text" class="form-control" name="estado" placeholder="Estado..." >
+                    </div>
+
+                    <div class="form-field">
+                        <input type="text" class="form-control" name="zipcode" placeholder="Zip codigo...">
+                    </div>
+
+                    <div class="form-field">
+                        <input type="text" class="form-control" name="country" placeholder="Country...">
+                    </div>
+                </div>
+
+                <hr>
+                <input type="submit" id="form-button" class="btn btn-success btn-block" value="Continuar">
+            </form>
+		</div>
+        <br>
+
+        <div class="box-element hidden" id="payment-info">
+            <small>Paypal Options</small>
+            <button id="hacer-pago">Confirmar Compra</button>
+        </div>
+		
+	</div>
+
+	<div class="col-lg-6">
+		<div class="box-element">
+            <a class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Volver al carrito</a>
+            <hr>
+
+            <h3>Resumen de la Compra</h3>
+            <hr>
+            {% for item in items%}
+            <div class="cart-row">
+                <div style="flex: 2;"><img class="row-image" src="{{item.producto.imagenURL}}"></div>
+                <div style="flex: 2;"><p>{{item.producto.nombre}}</p></div>
+                <div style="flex: 2;"><p>${{item.producto.precio}}</p></div>
+                <div style="flex: 2;"><p>{{item.cantidad}}</p></div>
+            </div>
+            {% endfor %}
+            <hr>
+            <h5>Cantidad de Productos:  {{pedido.get_items_carrito|floatformat:0}}</h5>
+            <h5>Total a pagar:  ${{pedido.get_total_carrito|floatformat:0}}</h5>
+		</div>
+
+	</div>
+</div>
+
+<script>
+
+    var total = '{{pedido.get_total_carrito}}'
+
+    if( usuario != 'AnonymousUser'){
+        document.getElementById('user-info').innerHTML = ' '
+    }
+
+
+
+    var form = document.getElementById('form')
+
+    csrftoken = form.getElementsByTagName("input")[0].value
+    console.log("Newtoken:", form.getElementsByTagName("input")[0].value)
+
+    form.addEventListener('submit', function(e){
+        e.preventDefault()
+
+        console.log("Formulario presentado....")
+        document.getElementById('form-button').classList.add('hidden')
+        document.getElementById('payment-info').classList.remove('hidden')
+    })
+
+    document.getElementById('hacer-pago').addEventListener('click', function(e){
+        submitDatosFormulario()
+    })
+
+    function submitDatosFormulario(){
+        console.log("Boton -Confirmar compra- clicked")
+
+        var infoUsuario = {
+            'nombre': null, 
+            'email': null,
+            'total': total,
+        }
+
+        var infoEnvio = {
+            'direccion': null,
+            'ciudad': null,
+            'estado': null,
+            'zipcode': null,
+            'country': null,
+        }
+
+        if(usuario == 'AnonymousUser'){
+            infoUsuario.nombre = form.nombre.value
+            infoUsuario.email = form.email.value
+
+            infoEnvio.direccion = form.direccion.value
+            infoEnvio.ciudad = form.ciudad.value
+            infoEnvio.estado = form.estado.value
+            infoEnvio.zipcode = form.zipcode.value
+            infoEnvio.country = form.country.value
+
+        }else{
+            infoEnvio.direccion = form.direccion.value
+            infoEnvio.ciudad = form.ciudad.value
+            infoEnvio.estado = form.estado.value
+            infoEnvio.zipcode = form.zipcode.value
+            infoEnvio.dircountryeccion = form.country.value
+        }
+
+        var url = '/proceso_pedido'
+
+        fetch(url, {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({'usuario': infoUsuario, 'envio': infoEnvio })
+        })
+
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Exito:', data);
+            alert('Transaccion Completada');
+
+            cart = {}
+            document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+                     
+            window.location.href = "{% url 'store'%}"
+        })
+    }
+</script>
+
+{% endblock contenido %}
+
