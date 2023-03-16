@@ -4,8 +4,11 @@ from . import views
 urlpatterns = [
     path('', views.store, name='store'),
     path('inicio', views.inicio, name='inicio'),
-    path('ropa', views.ropa, name='ropa'),
     path('zapatos', views.store, name='zapatos'),
+    path('camisetas', views.camisetas, name='camisetas'),
+    path('pantalones', views.pantalones, name='pantalones'),
+    path('chaquetas', views.chaquetas, name='chaquetas'),
+    
     path('cart', views.cart, name='cart'),
     path('checkout', views.checkout, name='checkout'),
 

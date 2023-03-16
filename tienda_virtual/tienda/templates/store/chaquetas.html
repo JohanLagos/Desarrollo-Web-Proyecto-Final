@@ -1,0 +1,27 @@
+{% extends 'store/main.html' %}
+{% load static %}
+<!-- <link rel="stylesheet" href="{% static 'css/main.css' %}"> -->
+{% block Titulo%}
+Camisetas
+{% endblock Titulo%}
+
+{% block contenido %}
+<div class="row">
+    {% for chaqueta in chaquetas %}
+    <div class="col-lg-4">
+        <div class="cont-Imagen">
+            <img class="thumbnail" src="{{chaqueta.imagenURL}}">
+        </div>
+        
+        <div class="box-element product">
+            <h6><strong>{{chaqueta.nombre}}</strong></h6>
+            <hr>
+            <button data-producto={{chaqueta.id}} data-accion="add" class="btn btn-outline-secondary add-btn actualizar-carrito">Agregar al Carrito</button>
+            <a class="btn btn-outline-success" href="#">Mirar</a>
+            <h4 style="display: block; float: right;"> <strong>${{chaqueta.precio|floatformat:0}}</strong></h4>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock contenido %}
