@@ -10,7 +10,10 @@ Ropa
 <div class="row">
     {% for ropa in ropas %}
     <div class="col-lg-4">
-        <img class="thumbnail" src="{{ropa.imagenURL}}">
+        <div class="cont-Imagen">
+            <img class="thumbnail" src="{{ropa.imagenURL}}">
+        </div>
+        
         <div class="box-element product">
             <h6><strong>{{ropa.nombre}}</strong></h6>
             <hr>

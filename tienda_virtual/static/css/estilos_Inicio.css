@@ -55,17 +55,31 @@ a:hover{
     flex-wrap: wrap;
     justify-content: flex-start;
     width: 100%;
+    position: absolute;
 }
 
 .col-2_I{
     margin: auto;
+    margin-top: 100px;
     flex-basis: 50%;
     min-width: 300px;
 }
 
 .col-2_I img{
     max-width: 100%;
-    padding: 50px 0;
+
+    border-radius: 50%;
+    display: block;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 69%,rgba(255,255,255,1) 100%);
+    border-radius: 50%;
+}
+
+.principal{
+    object-fit: cover;
+    -webkit-box-shadow: -1px 0px 18px 4px rgb(155, 93, 0);
+    -moz-box-shadow: -1px 0px 18px 4px rgb(87, 52, 0);
+    box-shadow: -1px 0px 18px 10px rgb(138, 83, 0);
+    border-radius: 50%;
 }
 
 .col-2_I h1{
@@ -73,8 +87,14 @@ a:hover{
     font-weight: bold;
     font-size: 45px;
     line-height: 60px;
-    margin: 25px 0;
+    margin: 100px 0px;
     letter-spacing: -2px;
+    margin-right: 50px;
+}
+
+.texto
+{
+    margin: 100px 0px 50px 50px;
 }
 
 .btn-explorar{
