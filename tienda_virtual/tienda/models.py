@@ -26,7 +26,7 @@ class Ropa(models.Model):
             url = ''
         return url
     
-class Producto(models.Model):
+class Zapato(models.Model):
     nombre = models.CharField(max_length=200)
     precio = models.DecimalField(max_digits=9, decimal_places=2)
     imagen = models.ImageField(null=True, blank=True)
@@ -42,6 +42,21 @@ class Producto(models.Model):
             url = ''
         return url
 
+class Producto(models.Model):
+    nombre = models.CharField(max_length=200)
+    precio = models.DecimalField(max_digits=9, decimal_places=2)
+    imagen = models.ImageField(null=True, blank=True)
+
+    def __str__(self):
+        return self.nombre
+    
+    @property
+    def imagenURL(self):
+        try:
+            url = self.imagen.url
+        except:
+            url = ''
+        return url
 
 class Pedido(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.SET_NULL, null=True, blank=True)

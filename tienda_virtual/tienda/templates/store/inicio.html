@@ -1,0 +1,30 @@
+{% extends 'store/main.html' %}
+{% load static %}
+<!-- <link rel="stylesheet" href="{% static 'css/main.css' %}"> -->
+{% block Titulo%}
+Tienda de Ropa
+{% endblock Titulo%}
+
+{% block contenido_Inicio %}
+<body>
+    <div class="container_I">
+        <hr>
+
+        <div class="row_I">
+            <div class="col-2_I">
+                <h1>CREA TU PROPIO ESPACIO, LUCE TU ESTILO Y MEJORA TU EXPERIENCIA</h1>
+                <p>Transmite en Streaming, crea y compite en los niveles mas altos <br> 
+                    con las caracteristicas lideres en la industria<br>
+                    <strong>Tenemos los mejores accesorios para tu computadora.</strong>
+                </p>
+            </div>
+
+            <div class="col-2_I">
+                <img src="{% static 'images/Tienda.jpg' %}" alt="homePage">
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+{% endblock contenido_Inicio %}

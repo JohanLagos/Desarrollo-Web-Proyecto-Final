@@ -18,12 +18,26 @@ def store(request):
     context = {'productos' : productos, 'item_carrito': item_carrito}
     return render(request, 'store/store.html', context)
 
+def inicio(request):
+    
+    return render(request, 'store/inicio.html')
+
+def zapato(request):
+    data = cartData(request)
+    
+    item_carrito = data['carritoItems']
+
+    zapatos = Zapato.objects.all()
+    context = {'zapatos' : zapatos, 'item_carrito': item_carrito}
+    return render(request, 'store/store.html', context)
+
 def ropa(request):
     data = cartData(request)
     
     item_carrito = data['carritoItems']
 
     ropa = Ropa.objects.all()
+
     context = {'ropas' : ropa, 'item_carrito': item_carrito}
     return render(request, 'store/ropa.html', context)
 
