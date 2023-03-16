@@ -14,4 +14,5 @@ urlpatterns = [
 
     path('actualizar_item', views.actualizar_item, name='actualizar_item'),
     path('proceso_pedido', views.proceso_pedido, name='proceso_pedido'),
+    path('salir/', views.salir, name='salir'),
 ]
