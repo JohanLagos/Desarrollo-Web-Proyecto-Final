@@ -1,0 +1,22 @@
+{% extends 'store/main.html' %}
+{% load static %}
+<!-- <link rel="stylesheet" href="{% static 'css/main.css' %}"> -->
+
+{% block contenido %}
+<h1>seccion de ropa</h1>
+<div class="row">
+    {% for ropa in ropas %}
+    <div class="col-lg-4">
+        <img class="thumbnail" src="{{ropa.imagenURL}}">
+        <div class="box-element product">
+            <h6><strong>{{ropa.nombre}}</strong></h6>
+            <hr>
+            <button data-producto={{ropa.id}} data-accion="add" class="btn btn-outline-secondary add-btn actualizar-carrito">Agregar al Carrito</button>
+            <a class="btn btn-outline-success" href="#">Mirar</a>
+            <h4 style="display: block; float: right;"> <strong>${{ropa.precio|floatformat:0}}</strong></h4>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock contenido %}
