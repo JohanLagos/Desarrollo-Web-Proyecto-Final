@@ -1,0 +1,45 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block titulo %} Inicio de sesión {% endblock %}
+
+{% block contenido %}
+
+{% if form.errors %}
+<p>Tu nombre de usuario y contraseña no son correctas. Por Favor, Intenta de nuevo.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Tu cuenta no tiene acceso a esta página. Para proceder 
+        Por Favor Inicia Sesión con una cuenta que tenga acceso.
+    </p>
+    {% else %}
+    <p>Por Favor Inicia Sesion para mirar estas página</p>
+    {% endif %}
+{% endif %}
+
+<form action="{% url 'login' %}" method="post">
+{% csrf_token %}
+<div class="card">
+    <div class="card-body">
+    <h4 class="card-title"><center>Inicia Sesión en tu cuenta</center></h4>
+    <div>
+        <td>{{ form.username.label_tag}}</td>
+        <td>{{ form.username }}</td>
+    </div>
+    <div>
+        <td>{{ form.password.label_tag}}</td>
+        <td>{{ form.password }}</td>
+    </div>
+
+    <div>
+        <input type="submit" value="login">
+        <input type="hidden" name="next" value="{{ next }}">
+    </div>
+</form>
+
+{# Assumes you setup the password_reset view in your URLconf #}
+<p><a href="{% url 'password_reset'%}">Lost password?</a></p>
+
+{% endblock %}
