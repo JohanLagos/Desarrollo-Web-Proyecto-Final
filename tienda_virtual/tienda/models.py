@@ -8,7 +8,7 @@ class Cliente(models.Model):
     email = models.CharField(max_length=200, null=True)
 
     def __str__(self):
-        return self.nombre
+        return "Nombre: " + self.nombre + " | Correo Electronico: " + self.email
 
 class Zapato(models.Model):
     nombre = models.CharField(max_length=200)
@@ -16,7 +16,7 @@ class Zapato(models.Model):
     imagen = models.ImageField(null=True, blank=True)
 
     def __str__(self):
-        return self.nombre
+        return "Nombre Producto: " + self.nombre + " | Precio: $ " + str(self.precio)
     
     @property
     def imagenURL(self):
@@ -32,7 +32,7 @@ class Camiseta(models.Model):
     imagen = models.ImageField(null=True, blank=True)
 
     def __str__(self):
-        return self.nombre
+        return "Nombre Producto: " + self.nombre + " | Precio: $ " + str(self.precio)
     
     @property
     def imagenURL(self):
@@ -48,7 +48,7 @@ class Pantalon(models.Model):
     imagen = models.ImageField(null=True, blank=True)
 
     def __str__(self):
-        return self.nombre
+        return "Nombre Producto: " + self.nombre + " | Precio: $ " + str(self.precio)
     
     @property
     def imagenURL(self):
@@ -64,7 +64,7 @@ class Chaqueta(models.Model):
     imagen = models.ImageField(null=True, blank=True)
 
     def __str__(self):
-        return self.nombre
+        return "Nombre Producto: " + self.nombre + " | Precio: $ " + str(self.precio)
     
     @property
     def imagenURL(self):
@@ -81,7 +81,7 @@ class Producto(models.Model):
     imagen = models.ImageField(null=True, blank=True)
 
     def __str__(self):
-        return self.nombre
+        return "Nombre Producto: " + self.nombre + " | Precio: $ " + str(self.precio)
     
     @property
     def imagenURL(self):
@@ -98,7 +98,8 @@ class Pedido(models.Model):
     id_transaccion = models.CharField(max_length=100, null=True)
 
     def __str__(self):
-        return str(self.id)
+
+        return "Id Pedido: " + str(self.id) +" | Fecha Pedido: " + str(self.fecha_pedido) +" | Completado: " + str(self.completo) +" | Id Transacción: " + str(self.id_transaccion)
     
     @property
     def get_total_carrito(self):
@@ -135,4 +136,4 @@ class DireccionCompra(models.Model):
     fecha_agregado = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return self.direccion
+        return "Cliente: " + self.cliente.nombre + " | Direccion: " + self.direccion + " | Ciudad: "  + self.ciudad + "Fecha Agregado: " + str(self.fecha_agregado)
