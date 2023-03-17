@@ -31,7 +31,9 @@ def zapato(request):
     item_carrito = data['carritoItems']
 
     zapatos = Zapato.objects.all()
+
     context = {'zapatos' : zapatos, 'item_carrito': item_carrito}
+
     return render(request, 'store/store.html', context)
 
 def camisetas(request):
@@ -62,6 +64,7 @@ def chaquetas(request):
     chaquetas = Chaqueta.objects.all()
 
     context = {'chaquetas' : chaquetas, 'item_carrito': item_carrito}
+    
     return render(request, 'store/chaquetas.html', context)
 
 def cart(request):

@@ -136,4 +136,4 @@ class DireccionCompra(models.Model):
     fecha_agregado = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return "Cliente: " + self.cliente.nombre + " | Direccion: " + self.direccion + " | Ciudad: "  + self.ciudad + "Fecha Agregado: " + str(self.fecha_agregado)
+        return " | Direccion: " + self.direccion + " | Ciudad: "  + self.ciudad + "Fecha Agregado: " + str(self.fecha_agregado)
