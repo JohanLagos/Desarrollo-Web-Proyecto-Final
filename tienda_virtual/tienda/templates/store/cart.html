@@ -15,8 +15,8 @@ Carrito
             
             <table class="table">
                 <tr>
-                    <th><h5>Items: <strong>{{pedido.get_items_carrito|floatformat:0}}</strong></h5></th>
-                    <th><h5>Total: <strong>${{pedido.get_total_carrito|floatformat:0}}</strong></h5></th>
+                    <th><h5 style="color:hsl(0, 0%, 30%);">Items: <strong>{{pedido.get_items_carrito|floatformat:0}}</strong></h5></th>
+                    <th><h5 style="color:hsl(0, 0%, 30%);">Total: <strong>${{pedido.get_total_carrito|floatformat:0}}</strong></h5></th>
                     <th>
                         <a style="float: right; margin: 5px;" class="btn btn-success" href="{% url 'checkout'%}">Verificar Compra</a>
                     </th>
